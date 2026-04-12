@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 
 // database
-let recepies = [
+let recipes = [
     {
         name: 'Spaghetti',
         servings: 4,
@@ -37,7 +37,10 @@ app.use(express.static('public'));
 
 // home root
 app.get('/', (req,res) => {
-    res.render('index')
+    res.render('index', {
+        title: "My recipes",
+        recipes
+    })
 })
 
 

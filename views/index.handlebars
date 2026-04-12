@@ -1,1 +1,8 @@
-<h1>Welcome</h1>
+<h1>{{title}}</h1>
+
+{{#each recipes}}
+    <p>{{this.name}}</p>
+    <p>{{this.servings}}</p>
+    <p>{{this.difficulty}}</p>
+    <p>{{this.time}}</p>
+{{/each}}
