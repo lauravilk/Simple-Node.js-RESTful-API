@@ -1,8 +1,8 @@
 <h1>{{title}}</h1>
 
 {{#each recipes}}
-    <p>{{this.name}}</p>
-    <p>{{this.servings}}</p>
-    <p>{{this.difficulty}}</p>
-    <p>{{this.time}}</p>
+    <div class="recipe">
+        <h2>{{this.name}}</h2>
+        <p>{{this.servings}} servings || difficulty: {{this.difficulty}} || {{this.time}} minutes</p>
+    </div>
 {{/each}}
