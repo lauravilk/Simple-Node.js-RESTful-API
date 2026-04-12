@@ -25,5 +25,24 @@ let recepies = [
 
 const app = express()
 
+// default layout
+app.engine('handlebars', exphbs.engine({
+    defaultLayout: 'main'
+}));
+
+app.set('view engine', 'handlebars');
+
+// static files
+app.use(express.static('public'));
+
+// home root
+app.get('/', (req,res) => {
+    res.render('index')
+})
+
+
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
