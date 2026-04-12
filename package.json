@@ -1,0 +1,19 @@
+{
+  "name": "simple-node.js-restful-api",
+  "version": "1.0.0",
+  "description": "Simple node.js restfull api",
+  "license": "ISC",
+  "author": "Laura Vilkman",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon simple nodejs restfull api"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
