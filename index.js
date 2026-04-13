@@ -53,6 +53,28 @@ app.get('/api/recipes', (req, res) => {
     });
 });
 
+// Route to get one recipe
+app.get('/api/recipes/:name', (req, res) => {
+    const name = req.params.name;
+    const recipe = recipes.find(recipe => recipe.name === name);
+
+    if (recipe) {
+        res.json(recipe);
+    }
+    else
+    {
+        res.status(404).json({
+            msg: 'Not found'
+        })
+    }
+})
+
+// Route to create a recipe
+
+// Route to update a recipe
+
+// route to delete a recipe
+
 
 
 
