@@ -1,29 +1,36 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const crypto = require('crypto');
+
+const app = express()
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // database
 let recipes = [
-    {
+    {  
+        id: crypto.randomUUID(),
         name: 'Spaghetti',
         servings: 4,
         difficulty: 'easy',
         time: 30
     },
     {
+        id: crypto.randomUUID(),
         name: 'Chicken Soup',
         servings: 2,
         difficulty: 'hard',
         time: 45
     },
     {
+        id: crypto.randomUUID(),
         name: 'fish tacos',
         servings: 3,
         difficulty: 'medium',
         time: 20
     }
 ]
-
-const app = express()
 
 // default layout
 app.engine('handlebars', exphbs.engine({
@@ -70,10 +77,35 @@ app.get('/api/recipes/:name', (req, res) => {
 })
 
 // Route to create a recipe
+app.post('/api/recipes', (req, res) => {
 
-// Route to update a recipe
+    if (req.body.name && req.body.servings) {
+        const newID = crypto.randomUUID();
+        //console.log(newID);
 
-// route to delete a recipe
+        const newRecipe = {
+            id: newID,
+            name: req.body.name,
+            servings: req.body.servings,
+            difficulty: req.body.difficulty,
+            time: req.body.time
+        }
+
+        recipes.push(newRecipe);
+        const url = `${req.protocol}://${req.get('host')}${req.originalUrl}${newID}`;
+
+        res.location(url);
+        res.status(201).json(newRecipe)
+    }
+    else
+    {
+        res.status(400).json({
+            msg: 'name and servings are required'
+        })
+    }
+});
+
+
 
 
 
