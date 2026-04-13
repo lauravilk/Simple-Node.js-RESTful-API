@@ -44,6 +44,15 @@ app.get('/', (req,res) => {
 })
 
 
+// Route to get all recipes
+app.get('/api/recipes', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        results: recipes.length,
+        data: recipes
+    });
+});
+
 
 
 
