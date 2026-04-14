@@ -50,6 +50,10 @@ app.get('/', (req,res) => {
     })
 })
 
+app.use((req, res, next) => {
+    res.status(404).send("Page not found");
+});
+
 
 // Route to get all recipes
 app.get('/api/recipes', (req, res) => {
