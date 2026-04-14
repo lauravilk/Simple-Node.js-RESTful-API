@@ -10,21 +10,21 @@ app.use(express.urlencoded({ extended: false }));
 // database
 let recipes = [
     {  
-        id: crypto.randomUUID(),
+        id: 1,
         name: 'Spaghetti',
         servings: 4,
         difficulty: 'easy',
         time: 30
     },
     {
-        id: crypto.randomUUID(),
+        id: 2,
         name: 'Chicken Soup',
         servings: 2,
         difficulty: 'hard',
         time: 45
     },
     {
-        id: crypto.randomUUID(),
+        id: 3,
         name: 'fish tacos',
         servings: 3,
         difficulty: 'medium',
@@ -80,7 +80,7 @@ app.get('/api/recipes/:name', (req, res) => {
 app.post('/api/recipes', (req, res) => {
 
     if (req.body.name && req.body.servings) {
-        const newID = crypto.randomUUID();
+        const newID = recipes[recipes.length-1].id +1;
         //console.log(newID);
 
         const newRecipe = {
@@ -105,6 +105,40 @@ app.post('/api/recipes', (req, res) => {
     }
 });
 
+// Route to update a recipe
+// KESKEN
+app.patch('/api/recipes/:id', (req, res) => {
+    const id = Number(req.params.id);
+
+    const recipe = recipes.find(recipe => recipe.id === id);
+
+    if (recipe) {
+        recipes.forEach(recipe => {
+            if (recipe.id === id) {
+                recipe.name = req.body.name;
+                recipe.servings = req.body.servings;
+                recipe.difficulty = req.body.difficulty;
+                recipe.time = req.body.time;
+            }
+        });
+
+        const updatedRecipe = {
+            id,
+            name: req.body.name,
+            servings: req.body.servings,
+            difficulty: req.body.difficulty,
+            time: req.body.time
+        }
+
+        res.status(200).json(updatedRecipe)
+    }   
+    else
+    {
+        res.status(404).json({
+            msg: 'Could not update the recipe'
+        })
+    }
+});
 
 
 
