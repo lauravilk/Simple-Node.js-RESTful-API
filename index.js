@@ -106,7 +106,6 @@ app.post('/api/recipes', (req, res) => {
 });
 
 // Route to update a recipe
-// KESKEN
 app.patch('/api/recipes/:id', (req, res) => {
     const id = Number(req.params.id);
 
@@ -140,6 +139,24 @@ app.patch('/api/recipes/:id', (req, res) => {
     }
 });
 
+// route to delete a recipe
+app.delete('/api/recipes/:id', (req, res) => {
+    const idToRemove = Number(req.params.id);
+    const recipe = recipes.find(recipe => recipe.id === idToRemove);
+
+    if (recipe) {
+        recipes = recipes.filter(recipe => recipe.id !== idToRemove);
+        res.status(200).json({
+            id: idToRemove,
+            msg: 'Recipe deleted'
+        });
+    }
+    else {
+        res.status(404).json({
+            msg: 'Not found'
+        });
+    }
+});
 
 
 
