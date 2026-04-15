@@ -14,21 +14,24 @@ let recipes = [
         name: 'Spaghetti',
         servings: 4,
         difficulty: 'easy',
-        time: 30
+        time: 30,
+        ingredients: ['spaghetti', 'tomato sauce', 'ground beef', 'onion']
     },
     {
         id: 2,
         name: 'Chicken Soup',
         servings: 2,
         difficulty: 'hard',
-        time: 45
+        time: 45,
+        ingredients: ['chicken', 'carrots', 'onion']
     },
     {
         id: 3,
-        name: 'fish tacos',
+        name: 'Fish tacos',
         servings: 3,
         difficulty: 'medium',
-        time: 20
+        time: 20,
+        ingredients: ['fish', 'tortillas', 'cabbage', 'lime']
     }
 ]
 
@@ -50,9 +53,6 @@ app.get('/', (req,res) => {
     })
 })
 
-app.use((req, res, next) => {
-    res.status(404).send("Page not found");
-});
 
 
 // Route to get all recipes
@@ -92,7 +92,8 @@ app.post('/api/recipes', (req, res) => {
             name: req.body.name,
             servings: req.body.servings,
             difficulty: req.body.difficulty,
-            time: req.body.time
+            time: req.body.time,
+            ingredients: req.body.ingredients
         }
 
         recipes.push(newRecipe);
@@ -122,6 +123,7 @@ app.patch('/api/recipes/:id', (req, res) => {
                 recipe.servings = req.body.servings;
                 recipe.difficulty = req.body.difficulty;
                 recipe.time = req.body.time;
+                recipe.ingredients = req.body.ingredients;
             }
         });
 
@@ -130,7 +132,8 @@ app.patch('/api/recipes/:id', (req, res) => {
             name: req.body.name,
             servings: req.body.servings,
             difficulty: req.body.difficulty,
-            time: req.body.time
+            time: req.body.time,
+            ingredients: req.body.ingredients
         }
 
         res.status(200).json(updatedRecipe)
@@ -160,6 +163,10 @@ app.delete('/api/recipes/:id', (req, res) => {
             msg: 'Not found'
         });
     }
+});
+
+app.use((req, res, next) => {
+    res.status(404).send("Page not found");
 });
 
 

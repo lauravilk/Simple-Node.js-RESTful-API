@@ -4,5 +4,11 @@
     <div class="recipe">
         <h2>{{this.name}}</h2>
         <p>{{this.servings}} servings || difficulty: {{this.difficulty}} || {{this.time}} minutes</p>
+        <h3>Ingredients:</h3>
+        <ul>
+            {{#each ingredients}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
     </div>
 {{/each}}
